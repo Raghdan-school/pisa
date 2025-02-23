@@ -40,6 +40,11 @@
         box-sizing: border-box;
     }
 
+    html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
     body {
         font-family: 'Almarai', sans-serif;
         background-color: var(--background-color);
@@ -52,7 +57,6 @@
         width: 90%;
         max-width: 1200px;
         margin: 0 auto;
-        padding: 0 20px;
     }
 
     header {
@@ -128,11 +132,139 @@
         margin-bottom: 15px;
     }
 
+    .pisa-info a {
+    color: var(--text-color);
+}
+
     .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Styles for the second grid */
+.grid:nth-of-type(2) {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+@media (max-width: 1127px) {
+    .grid:nth-of-type(2) {
+        grid-template-columns: repeat(3, 1fr);
     }
+}
+
+@media (max-width: 899px) {
+    .grid:nth-of-type(2) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 399px) {
+    .grid:nth-of-type(2) {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 320px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .card {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .card-header {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+
+    .card-content {
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .btn {
+        padding: 6px;
+        font-size: 0.8em;
+    }
+
+    .btn-small {
+        padding: 6px;
+        font-size: 0.8em;
+    }
+
+    .multi-column {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 6px;
+        padding: 10px;
+    }
+
+    .container {
+        width: 98%;
+    }
+
+    .pisa-info {
+        padding: 12px;
+    }
+
+    .pisa-info h2 {
+        font-size: 1.4em;
+    }
+
+    .pisa-info h3 {
+        font-size: 1.2em;
+    }
+
+    .pisa-info p, 
+    .pisa-info li {
+        font-size: 0.9em;
+    }
+
+    h1.section-title {
+        font-size: 1.3em;
+        margin-bottom: 15px;
+    }
+}
+
+/* Update existing mobile styles */
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+        margin: 0 auto;
+    }
+    
+    .pisa-info {
+        padding: 15px;
+    }
+    
+    .school-name h1 {
+        font-size: 1.4em;
+    }
+    .school-name h2 {
+        font-size: 1.2em;
+    }
+    .school-name h3 {
+        font-size: 1em;
+    }
+
+    .card-header {
+        font-size: 1em;
+        padding: 10px;
+    }
+
+    .btn {
+        padding: 8px;
+        font-size: 0.85em;
+    }
+
+    .multi-column {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 8px;
+    }
+}
 
     .card {
         background-color: var(--card-bg);
@@ -140,6 +272,8 @@
         overflow: hidden;
         box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        width: 100%;
+        min-width: 0; /* Prevents flex items from overflowing */
     }
 
     .card:hover {
@@ -157,15 +291,16 @@
     }
 
     .card-content {
-        padding: 20px;
+        padding: 15px;
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
+        word-break: break-word; /* Ensures long text wraps */
     }
 
     .btn {
         display: inline-block;
-        width: 100%; /* Changed from calc(50% - 5px) to 100% */
+        width: 100%;
         padding: 10px;
         background-color: var(--accent-color);
         color: var(--secondary-color);
@@ -175,10 +310,20 @@
         transition: background-color 0.3s ease, transform 0.2s ease;
         font-weight: bold;
         font-size: 0.9em;
+        white-space: normal; /* Ensures text wraps */
+        word-break: break-word;
     }
 
     .btn-small {
-        width: calc(50% - 5px);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 10px;
+        font-size: 0.9em;
+        word-break: break-word;
     }
 
     .about {
@@ -206,7 +351,8 @@
     }
 
     .footer-text {
-        text-align: right;
+        text-align: left;
+        font-size: 0.9em;
     }
 
     .theme-controls {
@@ -263,31 +409,43 @@
     }
     }
 
-    @media (max-width: 480px) {
-        .container {
-            width: 95%;
-            padding: 0 10px;
-        }
+    .full-width-grid {
+    width: 100%;
+}
 
-        .school-name h1 {
-            font-size: 1.6em;
-        }
-        .school-name h2 {
-            font-size: 1.3em;
-        }
-        .school-name h3 {
-            font-size: 1.1em;
-        }
+.full-width-grid .card {
+    width: 100%;
+}
 
-        .card-header {
-            font-size: 1.1em;
-        }
+.multi-column {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    padding: 15px;
+}
 
-        .btn {
-            padding: 8px;
-            font-size: 0.8em;
-        }
+a {
+    color: white;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
     }
+    
+    .theme-controls {
+        order: -1; /* Moves theme selector to top */
+    }
+    
+    .footer-text {
+        text-align: center;
+        font-size: 0.85em;
+    }
+}
     </style>
 </head>
 <body>
@@ -298,7 +456,7 @@
             </div>
             <div class="school-name">
                 <h4>وزارة التربية والتعليم</h4>
-                <h3>مديرية قصبة عمان</h3>
+                <h2>مديرية قصبة عمان</h2>
                 <h1> امتحان بيزا PISA الدولي للعام 2025</h1>
             </div>
             <div class="logo-container right-logo">
@@ -371,38 +529,32 @@
             </div>
             <br>
             <h1 class="section-title">المزيد من الاختبارات:</h1>
-            <div class="grid">
-         
-                <div class="card">
-                    <div class="card-header">امتحانات غير مترجمة (بالانجليزي)</div>
-                    <div class="card-content">                    
-                        <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=MAT&unit=MA104-CarPurchase&lang=eng-ZZZ" target="_blank" class="btn btn-small">Car Purchase</a>
-                        <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=MAT&unit=MA106-DVDSales&lang=eng-ZZZ" target="_blank" class="btn btn-small">DVD Sales</a>
-                        <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=MAT&unit=MA118-MovingTruck&lang=eng-ZZZ" target="_blank" class="btn btn-small">Moving Truck</a>
-                        <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=MAT&unit=MA123-SolarSystem&lang=eng-ZZZ" target="_blank" class="btn btn-small">Solar System</a>
-                        <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=MAT&unit=MA150-TriangularPattern&lang=eng-ZZZ" target="_blank" class="btn btn-small">Triangular Pattern</a>
-                        <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=MAT&unit=MA156-Points&lang=eng-ZZZ" target="_blank" class="btn btn-small">Points</a>
-                        <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=MAT&unit=MA159-Spinners&lang=eng-ZZZ" target="_blank" class="btn btn-small">Spinners</a>
-                        <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=MAT&unit=MA161-ForestedAreas&lang=eng-ZZZ" target="_blank" class="btn btn-small">Forested Areas</a>
-                        <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=CRT&unit=T200-SCienceFairPoster&lang=eng-ZZZ" target="_blank" class="btn btn-small">Science Fair Poster</a>
-                        <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=CRT&unit=T240-SpaceComic&lang=eng-ZZZ" target="_blank" class="btn btn-small">Space Comic</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">المزيد</div>
-                    <div class="card-content">
-                        <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=CRT&unit=T300-IllustrationTitles&lang=eng-ZZZ" target="_blank" class="btn btn-small">Illustration Titles</a>
-                        <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=CRT&unit=T370-2983&lang=eng-ZZZ" target="_blank" class="btn btn-small">2983</a>
-                        <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=CRT&unit=T400-SaveTheBees&lang=eng-ZZZ" target="_blank" class="btn btn-small">Save The Bees</a>
-                        <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=CRT&unit=T500-WheelchairAccessibleLibrary&lang=eng-ZZZ" target="_blank" class="btn btn-small">Library Accessibility</a>
-                        <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=CRT&unit=T570-RobotStory&lang=eng-ZZZ" target="_blank" class="btn btn-small">Robot Story</a>
-                        <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=CRT&unit=T630-Carpooling&lang=eng-ZZZ" target="_blank" class="btn btn-small">Carpooling</a>
-                        <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=CRT&unit=T690-SaveTheRiver&lang=eng-ZZZ" target="_blank" class="btn btn-small">Save The River</a>
-                        <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=FNL&unit=F082-NewBike&lang=eng-ZZZ" target="_blank" class="btn btn-small">New Bike</a>
-                        <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=FNL&unit=F403-SellingOnline&lang=eng-ZZZ" target="_blank" class="btn btn-small">Selling Online</a>
-                    </div>
-                </div>
-            </div>
+            <div class="full-width-grid">
+    <div class="card">
+        <div class="card-header">امتحانات غير مترجمة (بالانجليزي)</div>
+        <div class="multi-column">                    
+            <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=MAT&unit=MA104-CarPurchase&lang=eng-ZZZ" target="_blank" class="btn btn-small">Car Purchase</a>
+            <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=MAT&unit=MA106-DVDSales&lang=eng-ZZZ" target="_blank" class="btn btn-small">DVD Sales</a>
+            <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=MAT&unit=MA118-MovingTruck&lang=eng-ZZZ" target="_blank" class="btn btn-small">Moving Truck</a>
+            <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=MAT&unit=MA123-SolarSystem&lang=eng-ZZZ" target="_blank" class="btn btn-small">Solar System</a>
+            <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=MAT&unit=MA150-TriangularPattern&lang=eng-ZZZ" target="_blank" class="btn btn-small">Triangular Pattern</a>
+            <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=MAT&unit=MA156-Points&lang=eng-ZZZ" target="_blank" class="btn btn-small">Points</a>
+            <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=MAT&unit=MA159-Spinners&lang=eng-ZZZ" target="_blank" class="btn btn-small">Spinners</a>
+            <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=MAT&unit=MA161-ForestedAreas&lang=eng-ZZZ" target="_blank" class="btn btn-small">Forested Areas</a>
+            <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=CRT&unit=T200-SCienceFairPoster&lang=eng-ZZZ" target="_blank" class="btn btn-small">Science Fair Poster</a>
+            <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=CRT&unit=T240-SpaceComic&lang=eng-ZZZ" target="_blank" class="btn btn-small">Space Comic</a>
+            <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=CRT&unit=T300-IllustrationTitles&lang=eng-ZZZ" target="_blank" class="btn btn-small">Illustration Titles</a>
+            <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=CRT&unit=T370-2983&lang=eng-ZZZ" target="_blank" class="btn btn-small">2983</a>
+            <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=CRT&unit=T400-SaveTheBees&lang=eng-ZZZ" target="_blank" class="btn btn-small">Save The Bees</a>
+            <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=CRT&unit=T500-WheelchairAccessibleLibrary&lang=eng-ZZZ" target="_blank" class="btn btn-small">Library Accessibility</a>
+            <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=CRT&unit=T570-RobotStory&lang=eng-ZZZ" target="_blank" class="btn btn-small">Robot Story</a>
+            <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=CRT&unit=T630-Carpooling&lang=eng-ZZZ" target="_blank" class="btn btn-small">Carpooling</a>
+            <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=CRT&unit=T690-SaveTheRiver&lang=eng-ZZZ" target="_blank" class="btn btn-small">Save The River</a>
+            <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=FNL&unit=F082-NewBike&lang=eng-ZZZ" target="_blank" class="btn btn-small">New Bike</a>
+            <a href="https://pisa2022-questions.oecd.org/platform/index.html?user=&domain=FNL&unit=F403-SellingOnline&lang=eng-ZZZ" target="_blank" class="btn btn-small">Selling Online</a>
+        </div>
+    </div>
+</div>
         </div>
     </main>
 
